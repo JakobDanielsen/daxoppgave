@@ -9,13 +9,30 @@ let theirName
 let randNumber
 let minutesSince = Math.round(Date.now()/1000/60)
 let minutesSinceCheck = minutesSince
+let liAdd
 
 generateLuckyNumber()
+
+for (var i = 0; i < localStorage.length; i++){
+   liAdd +=  ` <li> ${localStorage.getItem(localStorage.key(i))} </li>`
+}
+$("#list").html(liAdd)
 
 FORM.submit((e)=>{
     e.preventDefault()
     theirName = NAMEINP.value
-    NAVNDISP.text("Velkommen "+theirName)
+    
+    if (!theirName.length) {
+        console.log("not valid");
+    } else {
+        NAVNDISP.text("Velkommen "+theirName)
+        localStorage.setItem("name"+localStorage.length,theirName)
+        liAdd += `
+        <li>${theirName}</li>
+        `
+        $("#list").html(liAdd)
+    }
+    
 })
 
 function generateLuckyNumber() {
@@ -26,12 +43,16 @@ function generateLuckyNumber() {
 setInterval(()=>{
     minutesSince = Math.floor(Date.now()/1000/60)
     if (minutesSince == minutesSinceCheck) {
-        console.log("minuttet har ikke endret seg");
     } else {
-        console.log("Minuttet har endret seg");
         minutesSinceCheck = minutesSince 
         generateLuckyNumber()
     }
-    console.log("minutesSince "+minutesSince);
-    console.log("minutesSinceCheck "+minutesSinceCheck);
+
 },1000)
+
+
+// LOCAL STORAGE
+
+
+
+// SESSION STORAGE

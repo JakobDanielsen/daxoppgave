@@ -1,9 +1,15 @@
-const SUBMITBTN = $("#nameBtn")
-
 // bruker getelement fordi jquery funker litt annerledes her
 const NAMEINP = document.getElementById("nameInp")
+
+// men ellers bruker jeg jquery
 const FORM = $("#nameForm")
 const NAVNDISP = $("#navnDisp")
+
+
+const FORM2 = $("#numberForm")
+const NUMERINP = $("#numberInp")
+
+
 
 let theirName
 let randNumber
@@ -11,6 +17,7 @@ let minutesSince = Math.round(Date.now() / 1000 / 60)
 let minutesSinceCheck = minutesSince
 let liAdd
 let currentName
+let guessedNumber
 
 generateLuckyNumber()
 
@@ -26,7 +33,7 @@ for (var i = 0; i < localStorage.length; i++) {
 $("#list").html(liAdd)
 
 
-FORM.submit((e) => {
+FORM.submit(e => {
     e.preventDefault()
     theirName = NAMEINP.value
 
@@ -50,6 +57,11 @@ FORM.submit((e) => {
 
 })
 
+FORM2.submit(e => {
+    e.preventDefault()
+    guessedNumber = NUMERINP.value
+})
+
 function generateLuckyNumber() {
     randNumber = Math.floor(Math.random() * 10 + 1)
     $("#luckyNum").text(randNumber)
@@ -57,7 +69,9 @@ function generateLuckyNumber() {
 
 setInterval(() => {
     minutesSince = Math.floor(Date.now() / 1000 / 60)
-    if (minutesSince == minutesSinceCheck) {} else {
+    if (minutesSince == minutesSinceCheck) {
+
+    } else {
         minutesSinceCheck = minutesSince
         generateLuckyNumber()
     }

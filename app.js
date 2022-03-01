@@ -63,7 +63,6 @@ FORM.submit(e => {
 FORM2.submit(e => {
     e.preventDefault()
     guessedNumber = NUMERINP.value
-    console.log(NUMERINP.value);
     $("#guess").text("Du gjettet "+guessedNumber)
 })
 

@@ -32,7 +32,6 @@ if (sessionStorage.getItem("currentName")) {
 // gjør localstorage til en liste
 for (var i = 0; i < localStorage.length; i++) {
     liAdd += `<li> ${localStorage.getItem(localStorage.key(i))} </li>`
-    console.log(liAdd);
 }
 $("#list").html(liAdd)
 

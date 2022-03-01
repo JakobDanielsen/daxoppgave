@@ -1,5 +1,6 @@
 // bruker getelement fordi jquery funker litt annerledes her
 const NAMEINP = document.getElementById("nameInp")
+const NUMERINP = document.getElementById("numberInp")
 
 // men ellers bruker jeg jquery
 const FORM = $("#nameForm")
@@ -7,7 +8,7 @@ const NAVNDISP = $("#navnDisp")
 
 
 const FORM2 = $("#numberForm")
-const NUMERINP = $("#numberInp")
+
 
 
 
@@ -15,7 +16,7 @@ let theirName
 let randNumber
 let minutesSince = Math.round(Date.now() / 1000 / 60)
 let minutesSinceCheck = minutesSince
-let liAdd
+let liAdd =""
 let currentName
 let guessedNumber
 
@@ -28,7 +29,8 @@ if (sessionStorage.getItem("currentName")) {
 
 // gjør localstorage til en liste
 for (var i = 0; i < localStorage.length; i++) {
-    liAdd += ` <li> ${localStorage.getItem(localStorage.key(i))} </li>`
+    liAdd += `<li> ${localStorage.getItem(localStorage.key(i))} </li>`
+    console.log(liAdd);
 }
 $("#list").html(liAdd)
 
@@ -36,6 +38,7 @@ $("#list").html(liAdd)
 FORM.submit(e => {
     e.preventDefault()
     theirName = NAMEINP.value
+    NAMEINP.value = ""
 
     if (!theirName.length) {
         console.log("not valid");
@@ -49,9 +52,7 @@ FORM.submit(e => {
 
 
         localStorage.setItem("name" + localStorage.length, theirName)
-        liAdd += `
-        <li>${theirName}</li>
-        `
+        liAdd += `<li>${theirName}</li>`
         $("#list").html(liAdd)
     }
 
@@ -60,11 +61,16 @@ FORM.submit(e => {
 FORM2.submit(e => {
     e.preventDefault()
     guessedNumber = NUMERINP.value
+    console.log(NUMERINP.value);
+    $("#guess").text("Du gjettet "+guessedNumber)
 })
 
 function generateLuckyNumber() {
     randNumber = Math.floor(Math.random() * 10 + 1)
     $("#luckyNum").text(randNumber)
+    if (1==guessedNumber) {
+        console.log("gjettet riktig");
+    }
 }
 
 setInterval(() => {
@@ -77,10 +83,3 @@ setInterval(() => {
     }
 
 }, 1000)
-
-
-// LOCAL STORAGE
-
-
-
-// SESSION STORAGE

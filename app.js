@@ -20,6 +20,8 @@ let liAdd =""
 let currentName
 let guessedNumber
 
+
+
 generateLuckyNumber()
 
 // sjekker om et navn er lagret i session
@@ -68,8 +70,17 @@ FORM2.submit(e => {
 function generateLuckyNumber() {
     randNumber = Math.floor(Math.random() * 10 + 1)
     $("#luckyNum").text(randNumber)
-    if (1==guessedNumber) {
+    if (randNumber==guessedNumber) {
         console.log("gjettet riktig");
+        let randHex =  
+        Math.floor(Math.random() * 9 + 1).toString() + 
+        Math.floor(Math.random() * 9 + 1).toString() + 
+        Math.floor(Math.random() * 9 + 1).toString() + 
+        Math.floor(Math.random() * 9 + 1).toString() + 
+        Math.floor(Math.random() * 9 + 1).toString() + 
+        Math.floor(Math.random() * 9 + 1).toString()
+
+        document.body.style.backgroundColor = `#${randHex}`
     }
 }
 
